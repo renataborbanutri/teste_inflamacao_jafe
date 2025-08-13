@@ -543,7 +543,7 @@
       </div>
       <div class="symptom">
         <div class="symptom-content">
-          <input id="s20" type="checkbox" value="Zinco e Ferro" class="sintoma">
+          <input id="s20" type="checkbox" value="Absorção de vitaminas" class="sintoma">
           <label for="s20">Unha quebradiça</label>
         </div>
       </div>
@@ -616,7 +616,7 @@
         <h2>Consequências de adiar o cuidado:</h2>
           <ul>
             <li>Maior resistência à insulina e acúmulo de gordura visceral.</li>
-            <li>Ciclos mais desregulados e TPM mais intensa.</li>
+            <li>Hormônios descontrolados na pré-menopausa, menopausa ou pós menopausa.</li>
             <li>Fadiga constante e névoa mental que afetam o foco.</li>
             <li>Sono leve/irregular, com despertares noturnos.</li>
             <li>Pele mais reativa e intestino instável.</li>
@@ -638,35 +638,15 @@
     function planoAcao(sistemasSet) {
       const itens = [];
       itens.push("Jejum estruturado e progressivo adequado ao seu nível atual.");
-
-      if (sistemasSet.has("Intestino") || sistemasSet.has("Microbiota") || sistemasSet.has("Digestivo")) {
-        itens.push("Reset intestinal: mais fibras, água, fermentados naturais e redução de gatilhos inflamatórios.");
-      }
-      if (sistemasSet.has("Sono")) {
-        itens.push("Higiene do sono: rotina noturna e ajustes de jejum para melhorar melatonina e recuperação.");
-      }
-      if (sistemasSet.has("Metabolismo") || sistemasSet.has("Inflamação hormonal") || sistemasSet.has("Tireoide")) {
-        itens.push("Controle hormonal e glicêmico: janela alimentar, proteína 'âncora' e combinação certa de macros.");
-      }
-      if (sistemasSet.has("Fígado")) {
-        itens.push("Suporte hepático via alimentação: menos ultraprocessados, ajustes de gordura e intervalos corretos.");
-      }
-      if (sistemasSet.has("Articulações") || sistemasSet.has("Muscular/Imune")) {
-        itens.push("Anti-inflamatório alimentar: foco em ômega-3 de qualidade, especiarias e redução de AGEs.");
-      }
-      if (sistemasSet.has("Cérebro") || sistemasSet.has("Neurológico")) {
-        itens.push("Clareza mental e energia: janelas estáveis, hidratação e refeição de abertura inteligente.");
-      }
-      if (sistemasSet.has("Urinário") || sistemasSet.has("Rins")) {
-        itens.push("Hidratação e eletrólitos na medida para reduzir despertares noturnos e retenção.");
-      }
-      if (sistemasSet.has("Zinco e Ferro")) {
-        itens.push("Atenção a ferro/zinco na dieta para unhas/cabelos e performance diária.");
-      }
-      if (sistemasSet.has("Pele")) {
-        itens.push("Pele mais calma: corte de ultraprocessados e equilíbrio de gorduras boas.");
-      }
-
+      if (sistemasSet.has("Intestino") || sistemasSet.has("Microbiota") || sistemasSet.has("Digestivo")) itens.push("Reset intestinal: mais fibras, água, fermentados naturais e redução de gatilhos inflamatórios.");
+      if (sistemasSet.has("Sono")) itens.push("Higiene do sono: rotina noturna e ajustes de jejum para melhorar melatonina e recuperação.");
+      if (sistemasSet.has("Metabolismo") || sistemasSet.has("Inflamação hormonal") || sistemasSet.has("Tireoide")) itens.push("Controle hormonal e glicêmico: janela alimentar, proteína 'âncora' e combinação certa de macros.");
+      if (sistemasSet.has("Fígado")) itens.push("Suporte hepático via alimentação: menos ultraprocessados, ajustes de gordura e intervalos corretos.");
+      if (sistemasSet.has("Articulações") || sistemasSet.has("Muscular/Imune")) itens.push("Anti-inflamatório com jejum e alimentação correta.");
+      if (sistemasSet.has("Cérebro") || sistemasSet.has("Neurológico")) itens.push("Clareza mental e energia: janelas estáveis, hidratação e refeições corretas para te dar energia e clareza mental.");
+      if (sistemasSet.has("Urinário") || sistemasSet.has("Rins")) itens.push("Jejum é o melhor Anti-inflamatório que existe.");
+      if (sistemasSet.has("Absorção de vitaminas")) itens.push("Mudanças alimentares para otimizar a absorção de vitaminas e minerais vindos dos alimentos.");
+      if (sistemasSet.has("Pele")) itens.push("Pele mais calma: cuidados para equilibrar seu corpo e desinflamar de dentro para fora.");
       return itens.map(t => `<li>${t}</li>`).join("");
     }
 
@@ -712,13 +692,24 @@
 
         <div class="bridge">${bridgeLabel(nivel) ? `<strong>${bridgeLabel(nivel)}</strong> ` : ""}${ponte}</div>
 
-        <div class="solution">
-          <h4>Meu plano de ação para você</h4>
-          <ul id="plano-ul"></ul>
-          <p class="assurance">Eu te guio dentro do JAFE para executar esse plano com segurança e constância — do jejum certo ao prato certo, até você sentir seu corpo responder.</p>
+       <div class="solution">
+          <h4 class="sol-title"><span class="sol-ico" aria-hidden="true">🧭</span>Plano de ação personalizado</h4>
+
+          <p class="sol-lead">Vamos agir em <strong>3 frentes</strong> para desinflamar e estabilizar hormônios:</p>
+
+          <ol class="sol-steps" role="list">
+            <li><strong>Jejum estruturado</strong> </li>
+            <li><strong>Reset intestinal</strong></li>
+            <li><strong>Prato inteligente</strong> — <em>quantidade certa</em> com a <strong>TATA</strong> (proteína âncora, combinações de macros e janela alimentar).</li>
+          </ol>
+
+          <h5 class="sol-sub">Ajustes finos para o seu caso</h5>
+          <ul id="plano-ul" class="sol-list"></ul>
+
+          <p class="assurance">Dentro do JAFE eu te guio na prática — do jejum certo ao prato certo, com segurança, constância e ajustes semanais até seu corpo responder.</p>
         </div>
 
-        <p style="margin-top:15px;"><em>No JAFE – Jejum Acelerador Feminino – você aprende exatamente o que comer e como usar o jejum como seu anti-inflamatório natural, a favor do seu controle hormonal.</em></p>
+
       `;
 
       const ul = document.getElementById('plano-ul');
@@ -730,4 +721,3 @@
 
 </body>
 </html>
-

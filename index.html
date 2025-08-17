@@ -8,11 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Poppins', sans-serif;
@@ -35,29 +31,25 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       position: relative;
       overflow: hidden;
+      animation: fadeIn 0.8s ease;
     }
 
     .container::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 4px;
       background: linear-gradient(90deg, #b03574, #d4567a, #b03574);
       animation: shimmer 3s ease-in-out infinite;
     }
 
-    @keyframes shimmer {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
+    @keyframes shimmer { 0%,100%{opacity:1} 50%{opacity:.7} }
 
     .logo {
       display: block;
       margin: 0 auto 30px;
       max-width: 200px;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,.1));
     }
 
     h1 {
@@ -80,341 +72,128 @@
       font-weight: 400;
     }
 
-    .symptoms-grid {
+    /* ==== NOVO: mesmos cards de checkbox usados nos hábitos ==== */
+    .checkbox-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 15px;
       margin: 30px 0;
     }
-
-    .symptom {
-      background: rgba(255, 255, 255, 0.8);
-      border: 2px solid rgba(176, 53, 116, 0.1);
+    .checkbox-item {
+      background: rgba(255,255,255,.8);
+      border: 2px solid rgba(176,53,116,.1);
       border-radius: 16px;
       padding: 16px 20px;
-      margin: 0;
-      transition: all 0.3s ease;
       cursor: pointer;
       position: relative;
+      transition: all .3s ease;
       overflow: hidden;
     }
-
-    .symptom::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(176, 53, 116, 0.1), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .symptom:hover {
+    .checkbox-item:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(176, 53, 116, 0.15);
-      border-color: rgba(176, 53, 116, 0.3);
+      box-shadow: 0 8px 25px rgba(176,53,116,.15);
+      border-color: rgba(176,53,116,.3);
     }
-
-    .symptom:hover::before {
-      left: 100%;
-    }
-
-    .symptom.checked {
+    .checkbox-item.selected {
       background: linear-gradient(135deg, #b03574, #d4567a);
-      color: white;
+      color: #fff;
       border-color: #b03574;
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(176, 53, 116, 0.3);
+      box-shadow: 0 8px 25px rgba(176,53,116,.3);
     }
-
-    input[type="checkbox"] {
-      appearance: none;
-      width: 24px;
-      height: 24px;
-      border: 2px solid #ddd;
-      border-radius: 6px;
-      margin-right: 12px;
-      position: relative;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      flex-shrink: 0;
-    }
-
-    input[type="checkbox"]:checked {
-      background: white;
-      border-color: white;
-    }
-
-    input[type="checkbox"]:checked::after {
-      content: '✓';
+    .checkbox-item input { display: none; }
+    .checkbox-item .checkmark {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #b03574;
-      font-weight: bold;
-      font-size: 14px;
+      top: 10px; right: 10px;
+      width: 20px; height: 20px;
+      border: 2px solid #ddd;
+      border-radius: 50%;
+      transition: all .3s ease;
+      background: transparent;
     }
-
-    .symptom.checked input[type="checkbox"] {
-      background: white;
-      border-color: white;
+    .checkbox-item.selected .checkmark {
+      background: #fff;
+      border-color: #fff;
     }
-
-    label {
-      cursor: pointer;
-      font-weight: 500;
-      flex: 1;
-      user-select: none;
-    }
-
-    .symptom-content {
-      display: flex;
-      align-items: center;
-      width: 100%;
+    .checkbox-item.selected .checkmark::after {
+      content: '✓';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      color: #b03574; font-weight: 800; font-size: 12px;
     }
 
     button {
       background: linear-gradient(135deg, #b03574, #d4567a);
-      color: white;
-      border: none;
-      padding: 18px 32px;
-      font-size: 18px;
-      border-radius: 50px;
-      width: 100%;
-      margin-top: 30px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 20px rgba(176, 53, 116, 0.3);
-      position: relative;
-      overflow: hidden;
+      color: white; border: none;
+      padding: 18px 32px; font-size: 18px;
+      border-radius: 50px; width: 100%;
+      margin-top: 30px; cursor: pointer; font-weight: 600;
+      transition: all .3s ease;
+      box-shadow: 0 6px 20px rgba(176,53,116,.3);
+      position: relative; overflow: hidden;
     }
-
     button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s ease;
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+      transition: left .5s ease;
     }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(176, 53, 116, 0.4);
-    }
-
-    button:hover::before {
-      left: 100%;
-    }
-
-    button:active {
-      transform: translateY(0);
-    }
+    button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(176,53,116,.4); }
+    button:hover::before { left: 100%; }
+    button:active { transform: translateY(0); }
 
     .result {
       margin-top: 30px;
-      background: linear-gradient(135deg, rgba(255, 240, 244, 0.9), rgba(255, 245, 248, 0.9));
-      border: 1px solid rgba(176, 53, 116, 0.2);
+      background: linear-gradient(135deg, rgba(255,240,244,.9), rgba(255,245,248,.9));
+      border: 1px solid rgba(176,53,116,.2);
       border-left: 5px solid #b03574;
-      padding: 25px;
-      border-radius: 16px;
+      padding: 25px; border-radius: 16px;
       backdrop-filter: blur(10px);
-      animation: fadeInUp 0.5s ease;
+      animation: fadeInUp .5s ease;
     }
+    @keyframes fadeInUp { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .promo-text {
-      text-align: center;
-      margin-top: 40px;
-      animation: fadeInUp 0.6s ease 0.2s both;
-    }
-
-    .promo-text p {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #b03574;
-      margin-bottom: 20px;
-    }
-
+    .promo-text { text-align: center; margin-top: 40px; animation: fadeInUp .6s ease .2s both; }
+    .promo-text p { font-size: 1.3rem; font-weight: 600; color: #b03574; margin-bottom: 20px; }
     .promo-text a.button {
-      display: inline-block;
-      background: linear-gradient(135deg, #b03574, #d4567a);
-      color: white;
-      padding: 16px 32px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 18px;
-      margin-top: 15px;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 20px rgba(176, 53, 116, 0.3);
-      position: relative;
-      overflow: hidden;
+      display: inline-block; background: linear-gradient(135deg, #b03574, #d4567a);
+      color: #fff; padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 18px;
+      margin-top: 15px; transition: all .3s ease; box-shadow: 0 6px 20px rgba(176,53,116,.3); position: relative; overflow: hidden;
     }
-
     .promo-text a.button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s ease;
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); transition: left .5s ease;
     }
+    .promo-text a.button:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(176,53,116,.4); }
+    .promo-text a.button:hover::before { left: 100%; }
 
-    .promo-text a.button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 35px rgba(176, 53, 116, 0.4);
-    }
+    ul { padding-left: 20px; text-align: left; margin: 15px 0; }
+    li { margin: 8px 0; position: relative; }
 
-    .promo-text a.button:hover::before {
-      left: 100%;
-    }
-
-    .cta-green {
-      background: linear-gradient(135deg, #25D366, #20c558);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-      font-size: 16px;
-      margin-top: 15px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-    }
-
-    .cta-green:hover {
-      background: linear-gradient(135deg, #20c558, #1ebe5d);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-    }
-
-    ul {
-      padding-left: 20px;
-      text-align: left;
-      margin: 15px 0;
-    }
-
-    li {
-      margin: 8px 0;
-      position: relative;
-    }
-
-    .bridge {
-      margin-top: 15px;
-    }
-
-    .bridge ul {
-      margin: 12px 0 0;
-      padding-left: 20px;
-    }
-
-    .bridge li {
-      margin: 6px 0;
-    }
+    .bridge { margin-top: 15px; }
+    .bridge ul { margin: 12px 0 0; padding-left: 20px; }
+    .bridge li { margin: 6px 0; }
 
     .solution {
       margin-top: 25px;
-      background: linear-gradient(135deg, rgba(255, 246, 250, 0.9), rgba(248, 240, 255, 0.9));
-      border: 1px solid rgba(242, 207, 225, 0.5);
-      border-radius: 16px;
-      padding: 20px;
-      backdrop-filter: blur(5px);
+      background: linear-gradient(135deg, rgba(255,246,250,.9), rgba(248,240,255,.9));
+      border: 1px solid rgba(242,207,225,.5);
+      border-radius: 16px; padding: 20px; backdrop-filter: blur(5px);
     }
+    .solution h4 { margin: 0 0 12px 0; color: #8b2b59; font-weight: 700; font-size: 1.2rem; }
+    .assurance { margin-top: 15px; font-weight: 600; color: #6e2549; padding: 15px; background: rgba(255,255,255,.5); border-radius: 12px; border-left: 4px solid #b03574; }
 
-    .solution h4 {
-      margin: 0 0 12px 0;
-      color: #8b2b59;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-    .assurance {
-      margin-top: 15px;
-      font-weight: 600;
-      color: #6e2549;
-      padding: 15px;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 12px;
-      border-left: 4px solid #b03574;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    /* Responsive Design */
     @media (max-width: 768px) {
-      .container {
-        padding: 25px;
-        margin: 10px;
-        border-radius: 20px;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .subtitle {
-        font-size: 1rem;
-      }
-
-      .symptoms-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .symptom {
-        padding: 14px 16px;
-      }
-
-      button {
-        padding: 16px 24px;
-        font-size: 16px;
-      }
+      .container { padding: 25px; margin: 10px; border-radius: 20px; }
+      h1 { font-size: 1.8rem; }
+      .subtitle { font-size: 1rem; }
+      .checkbox-grid { grid-template-columns: 1fr; gap: 12px; }
+      button { padding: 16px 24px; font-size: 16px; }
     }
 
-    /* Animação de entrada */
-    .container {
-      animation: fadeIn 0.8s ease;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(30px)} to{opacity:1; transform:translateY(0)} }
   </style>
 </head>
 <body>
@@ -425,133 +204,132 @@
     <h1>Autoavaliação da Inflamação</h1>
     <p class="subtitle">Marque os sintomas que você sente com frequência:</p>
 
-    <!-- Sintomas -->
-    <div class="symptoms-grid">
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s1" type="checkbox" value="Intestino" class="sintoma">
-          <label for="s1">Barriga inchada ou gases</label>
-        </div>
+    <!-- Sintomas em cards .checkbox-grid / .checkbox-item (sem <small>) -->
+    <div class="checkbox-grid" id="symptom-grid">
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Barriga inchada ou gases">
+        <input id="s1" type="checkbox" class="sintoma" value="Intestino">
+        <div class="checkmark"></div>
+        <strong>Barriga inchada ou gases</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s2" type="checkbox" value="Intestino" class="sintoma">
-          <label for="s2">Constipação ou intestino solto</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Constipação ou intestino solto">
+        <input id="s2" type="checkbox" class="sintoma" value="Intestino">
+        <div class="checkmark"></div>
+        <strong>Constipação ou intestino solto</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s3" type="checkbox" value="Pele" class="sintoma">
-          <label for="s3">Acne, rosácea ou pele irritada</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Acne, rosácea ou pele irritada">
+        <input id="s3" type="checkbox" class="sintoma" value="Pele">
+        <div class="checkmark"></div>
+        <strong>Acne, rosácea ou pele irritada</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s4" type="checkbox" value="Hormonal" class="sintoma">
-          <label for="s4">TPM intensa ou ciclo irregular</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="TPM intensa ou ciclo irregular">
+        <input id="s4" type="checkbox" class="sintoma" value="Hormonal">
+        <div class="checkmark"></div>
+        <strong>TPM intensa ou ciclo irregular</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s5" type="checkbox" value="Articulações" class="sintoma">
-          <label for="s5">Dor nas articulações</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Dor nas articulações">
+        <input id="s5" type="checkbox" class="sintoma" value="Articulações">
+        <div class="checkmark"></div>
+        <strong>Dor nas articulações</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s6" type="checkbox" value="Cérebro" class="sintoma">
-          <label for="s6">Cansaço excessivo ou névoa mental</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Cansaço excessivo ou névoa mental">
+        <input id="s6" type="checkbox" class="sintoma" value="Cérebro">
+        <div class="checkmark"></div>
+        <strong>Cansaço excessivo ou névoa mental</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s7" type="checkbox" value="Fígado" class="sintoma">
-          <label for="s7">Enjoo com alimentos gordurosos</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Enjoo com alimentos gordurosos">
+        <input id="s7" type="checkbox" class="sintoma" value="Fígado">
+        <div class="checkmark"></div>
+        <strong>Enjoo com alimentos gordurosos</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s8" type="checkbox" value="Sono" class="sintoma">
-          <label for="s8">Dificuldade para dormir ou sono não reparador</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Dificuldade para dormir ou sono não reparador">
+        <input id="s8" type="checkbox" class="sintoma" value="Sono">
+        <div class="checkmark"></div>
+        <strong>Dificuldade para dormir ou sono não reparador</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s9" type="checkbox" value="Metabolismo" class="sintoma">
-          <label for="s9">Dificuldade em perder peso</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Dificuldade em perder peso">
+        <input id="s9" type="checkbox" class="sintoma" value="Metabolismo">
+        <div class="checkmark"></div>
+        <strong>Dificuldade em perder peso</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s10" type="checkbox" value="Inflamação hormonal" class="sintoma">
-          <label for="s10">Gordura na região abdominal</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Gordura na região abdominal">
+        <input id="s10" type="checkbox" class="sintoma" value="Inflamação hormonal">
+        <div class="checkmark"></div>
+        <strong>Gordura na região abdominal</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s11" type="checkbox" value="Rins" class="sintoma">
-          <label for="s11">Acorda muito para fazer xixi</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Acorda muito para fazer xixi">
+        <input id="s11" type="checkbox" class="sintoma" value="Rins">
+        <div class="checkmark"></div>
+        <strong>Acorda muito para fazer xixi</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s12" type="checkbox" value="Microbiota" class="sintoma">
-          <label for="s12">Candidíase</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Candidíase">
+        <input id="s12" type="checkbox" class="sintoma" value="Microbiota">
+        <div class="checkmark"></div>
+        <strong>Candidíase</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s13" type="checkbox" value="Urinário" class="sintoma">
-          <label for="s13">Infecção urinária</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Infecção urinária">
+        <input id="s13" type="checkbox" class="sintoma" value="Urinário">
+        <div class="checkmark"></div>
+        <strong>Infecção urinária</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s14" type="checkbox" value="Neurológico" class="sintoma">
-          <label for="s14">Dores de cabeça</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Dores de cabeça">
+        <input id="s14" type="checkbox" class="sintoma" value="Neurológico">
+        <div class="checkmark"></div>
+        <strong>Dores de cabeça</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s15" type="checkbox" value="Muscular/Imune" class="sintoma">
-          <label for="s15">Dor no corpo</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Dor no corpo">
+        <input id="s15" type="checkbox" class="sintoma" value="Muscular/Imune">
+        <div class="checkmark"></div>
+        <strong>Dor no corpo</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s16" type="checkbox" value="Imunológico" class="sintoma">
-          <label for="s16">Alergias</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Alergias">
+        <input id="s16" type="checkbox" class="sintoma" value="Imunológico">
+        <div class="checkmark"></div>
+        <strong>Alergias</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s17" type="checkbox" value="Hormonal" class="sintoma">
-          <label for="s17">Ressecamento vaginal</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Ressecamento vaginal">
+        <input id="s17" type="checkbox" class="sintoma" value="Hormonal">
+        <div class="checkmark"></div>
+        <strong>Ressecamento vaginal</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s18" type="checkbox" value="Hormonal" class="sintoma">
-          <label for="s18">Baixa libido</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Baixa libido">
+        <input id="s18" type="checkbox" class="sintoma" value="Hormonal">
+        <div class="checkmark"></div>
+        <strong>Baixa libido</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s19" type="checkbox" value="Digestivo" class="sintoma">
-          <label for="s19">Língua esbranquiçada</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Língua esbranquiçada">
+        <input id="s19" type="checkbox" class="sintoma" value="Digestivo">
+        <div class="checkmark"></div>
+        <strong>Língua esbranquiçada</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s20" type="checkbox" value="Absorção de vitaminas" class="sintoma">
-          <label for="s20">Unha quebradiça</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Unha quebradiça">
+        <input id="s20" type="checkbox" class="sintoma" value="Absorção de vitaminas">
+        <div class="checkmark"></div>
+        <strong>Unha quebradiça</strong>
       </div>
-      <div class="symptom">
-        <div class="symptom-content">
-          <input id="s21" type="checkbox" value="Tireoide" class="sintoma">
-          <label for="s21">Queda de cabelo</label>
-        </div>
+
+      <div class="checkbox-item" onclick="toggleSymptomCard(this)" data-text="Queda de cabelo">
+        <input id="s21" type="checkbox" class="sintoma" value="Tireoide">
+        <div class="checkmark"></div>
+        <strong>Queda de cabelo</strong>
       </div>
     </div>
 
@@ -560,15 +338,11 @@
     <div class="result" id="resultado" aria-live="polite"></div>
 
     <div class="promo-text" id="promo-section" style="display: none;">
-      <p>
-        Eu vou te conduzir com jejum + alimentação correta para desinflamar e recuperar seu controle hormonal.
-      </p>
-
+      <p>Eu vou te conduzir com jejum + alimentação correta para desinflamar e recuperar seu controle hormonal.</p>
       <ul>
         <li>Jejum como <strong>anti-inflamatório natural</strong> — aplicado com segurança e estratégia.</li>
         <li><strong>Quantidade certa para você</strong>: você vai saber exatamente quanto comer usando a TATA, minha calculadora inteligente que monta suas refeições.</li>
       </ul>
-
       <a
         id="cta-jejum"
         href="https://renataborbanutri.github.io/jejum/?utm_source=autoavaliacao&utm_medium=cta_main&utm_campaign=jaf"
@@ -582,56 +356,32 @@
   </div>
 
   <script>
-    // Adicionar interatividade visual aos checkboxes
-    document.querySelectorAll('.sintoma').forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
-        const symptomCard = this.closest('.symptom');
-        if (this.checked) {
-          symptomCard.classList.add('checked');
-        } else {
-          symptomCard.classList.remove('checked');
-        }
-      });
-    });
-
-    // Adicionar click em toda a card para marcar/desmarcar
-    document.querySelectorAll('.symptom').forEach(card => {
-      card.addEventListener('click', function(e) {
-        if (e.target.type !== 'checkbox' && e.target.tagName !== 'LABEL') {
-          const checkbox = this.querySelector('input[type="checkbox"]');
-          checkbox.checked = !checkbox.checked;
-          checkbox.dispatchEvent(new Event('change'));
-        }
-      });
-    });
-
-    function mensagemPonte(nivel) {
-      if (nivel.includes("Leves")) {
-        return "";
-      } else if (nivel.includes("Moderadas")) {
-        return "";
-      } else {
-        // ALTA 🔴 → consequências se não agir agora (em bullets)
-        return `
-        <h2>Consequências de adiar o cuidado:</h2>
-          <ul>
-            <li>Maior resistência à insulina e acúmulo de gordura visceral.</li>
-            <li>Hormônios descontrolados na pré-menopausa, menopausa ou pós menopausa.</li>
-            <li>Fadiga constante e névoa mental que afetam o foco.</li>
-            <li>Sono leve/irregular, com despertares noturnos.</li>
-            <li>Pele mais reativa e intestino instável.</li>
-            <li>Risco crescente de síndrome metabólica.</li>
-            <li>Dores articulares mais frequentes e recuperação lenta.</li>
-          </ul>
-        `;
-      }
+    // Handler para os cards de sintomas no novo layout
+    function toggleSymptomCard(element) {
+      const input = element.querySelector('input.sintoma');
+      input.checked = !input.checked;
+      element.classList.toggle('selected', input.checked);
     }
 
-    // Rótulo: vazio para Leve/Moderada; alerta para Alta
+    function mensagemPonte(nivel) {
+      if (nivel.includes("Leve")) return "";
+      if (nivel.includes("Moderada")) return "";
+      return `
+        <h2>Consequências de adiar o cuidado:</h2>
+        <ul>
+          <li>Maior resistência à insulina e acúmulo de gordura visceral.</li>
+          <li>Hormônios descontrolados na pré-menopausa, menopausa ou pós menopausa.</li>
+          <li>Fadiga constante e névoa mental que afetam o foco.</li>
+          <li>Sono leve/irregular, com despertares noturnos.</li>
+          <li>Pele mais reativa e intestino instável.</li>
+          <li>Risco crescente de síndrome metabólica.</li>
+          <li>Dores articulares mais frequentes e recuperação lenta.</li>
+        </ul>
+      `;
+    }
+
     function bridgeLabel(nivel) {
-      return nivel.includes("Alta")
-        ? ""
-        : ""; // sem rótulo para Leve/Moderada
+      return ""; // sem rótulo adicional
     }
 
     // Plano de ação dinâmico conforme sistemas marcados
@@ -676,7 +426,11 @@
       const sintomasTexto = [];
       sintomasMarcados.forEach(s => {
         sistemas.push(s.value);
-        sintomasTexto.push(s.parentElement.innerText.trim());
+        const card = s.closest('.checkbox-item');
+        const texto = (card?.getAttribute('data-text')) ||
+                      (card?.querySelector('strong')?.innerText.trim()) ||
+                      s.parentElement.innerText.trim();
+        sintomasTexto.push(texto);
       });
 
       const unicosSistemas = [...new Set(sistemas)].join(', ');
@@ -692,24 +446,18 @@
 
         <div class="bridge">${bridgeLabel(nivel) ? `<strong>${bridgeLabel(nivel)}</strong> ` : ""}${ponte}</div>
 
-       <div class="solution">
+        <div class="solution">
           <h4 class="sol-title"><span class="sol-ico" aria-hidden="true">🧭</span>Plano de ação personalizado</h4>
-
           <p class="sol-lead">Vamos agir em <strong>3 frentes</strong> para desinflamar e estabilizar hormônios:</p>
-
           <ol class="sol-steps" role="list">
-            <li><strong>Jejum estruturado</strong> </li>
+            <li><strong>Jejum estruturado</strong></li>
             <li><strong>Reset intestinal</strong></li>
             <li><strong>Prato inteligente</strong> — <em>quantidade certa</em> com a <strong>TATA</strong> (proteína âncora, combinações de macros e janela alimentar).</li>
           </ol>
-
           <h5 class="sol-sub">Ajustes finos para o seu caso</h5>
           <ul id="plano-ul" class="sol-list"></ul>
-
           <p class="assurance">Dentro do JAFE eu te guio na prática — do jejum certo ao prato certo, com segurança, constância e ajustes semanais até seu corpo responder.</p>
         </div>
-
-
       `;
 
       const ul = document.getElementById('plano-ul');
